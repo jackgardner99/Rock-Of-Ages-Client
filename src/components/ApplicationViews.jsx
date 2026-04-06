@@ -6,7 +6,6 @@ import Home from "../pages/Home"
 import { RockForm } from "./RockForm.jsx"
 import { RockList } from "./RockList.jsx"
 import { Register } from '../pages/Register.jsx'
-import { faLessThanEqual } from '@fortawesome/free-solid-svg-icons/faLessThanEqual'
 
 
 export const ApplicationViews = () => {

@@ -2,10 +2,10 @@ import { useEffect } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
-export const RockList = ({ rocks, fetchRocks }) => {
+export const RockList = ({ rocks, fetchRocks, showAll }) => {
     useEffect(() => {
-        fetchRocks()
-    }, [fetchRocks])
+        fetchRocks(showAll)
+    }, [fetchRocks, showAll])
 
     const handleDelete = async (id) => {
         await fetch(`http://localhost:8000/rocks/${id}`, {
@@ -24,7 +24,8 @@ export const RockList = ({ rocks, fetchRocks }) => {
             return rocks.map(rock => <div key={`key-${rock.id}`} className="border p-5 border-solid hover:bg-fuchsia-500 hover:text-violet-50 rounded-md border-violet-900 mt-5 bg-slate-50">
                 <div>{rock.name} ({rock.type.label})</div>
                 <div>In the collection of {rock.user?.first_name} {rock.user?.last_name}</div>
-                <div>
+                {!showAll && (
+                    <div>
                     <button
                         onClick={() => handleDelete(rock.id)}
                         className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors duration-200"
@@ -32,6 +33,7 @@ export const RockList = ({ rocks, fetchRocks }) => {
                         <FontAwesomeIcon icon={faTrash} className="h-5 w-5" />
                     </button>
                 </div>
+                )} 
             </div>)
         }
 
